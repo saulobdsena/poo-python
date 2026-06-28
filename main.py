@@ -26,18 +26,18 @@ class Character():
     def show_details(self):
 
         return f"Name: {self.get_name()}\nHp: {self.get_hp()}\nLevel: {self.get_level()}"
-    
-    def attack(self, enemy):
-        damage = self.__level * 2
-        print(f"{self.get_name()} attack {enemy.get_name()} damage is {damage} !")
 
     def come_under_attack(self, damage):
         self.__hp -= damage
         if self.__hp < 0:
-            self.__hp == 0
+            self.__hp = 0
 
 
-    
+    def attack(self, enemy):
+        damage = self.__level * 2
+        enemy.come_under_attack(damage)
+        print(f"{self.get_name()} attack {enemy.get_name()} damage is {damage} !")
+
 
 
 
@@ -61,6 +61,10 @@ class Hero(Character):
     def come_under_attack(self, damage):
         return super().come_under_attack(damage)
 
+    def special_attack(self, enemy):
+        damage = 4 * self.get_level()
+        enemy.come_under_attack(damage)
+        print(f"{self.get_name()} attack {enemy.get_name()} damage is {damage} !")
 
 class Enemy(Character):
 
@@ -74,8 +78,8 @@ class Enemy(Character):
     def show_details(self):
         return super().show_details() + f"\n Type: {self.get_type()}"
     
-    def attack(self, enemy):
-        return super().attack(enemy)
+    def attack(self, hero):
+        return super().attack(hero)
     
     def come_under_attack(self, damage):
         return super().come_under_attack(damage)
@@ -104,8 +108,20 @@ class Game:
             if chose == 1:
                 self.hero.attack(self.enemy)
 
+            if chose == 2:
+                self.hero.special_attack(self.enemy)
+
             else:
                 print("Invalid chose")
+
+            if self.hero.get_hp() > 0:
+                self.enemy.attack(self.hero)
+        
+        if self.hero.get_hp() > 0:
+            print("Congratulations, you win the battle!")
+        else:
+            print("Game over, you lose!")
+
 
 
 
