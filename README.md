@@ -170,20 +170,6 @@ project/
 
 ---
 
-## 🔮 Future Improvements
-
-- Experience (XP) system
-- Character leveling
-- Inventory system
-- Healing items
-- Multiple enemies
-- Character selection
-- Critical hits
-- Defense mechanics
-- Graphical User Interface (GUI)
-- Save and load game progress
-- Random enemy generation
-
 ---
 
 ## 👨‍💻 Author
