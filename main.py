@@ -27,6 +27,17 @@ class Character():
 
         return f"Name: {self.get_name()}\nHp: {self.get_hp()}\nLevel: {self.get_level()}"
     
+    def attack(self, enemy):
+        damage = self.__level * 2
+        print(f"{self.get_name()} attack {enemy.get_name()} damage is {damage} !")
+
+    def come_under_attack(self, damage):
+        self.__hp -= damage
+        if self.__hp < 0:
+            self.__hp == 0
+
+
+    
 
 
 
@@ -43,8 +54,12 @@ class Hero(Character):
     
     def show_details(self):
         return super().show_details() + f"\n Skill: {self.get_skill()}"
+    
+    def attack(self, enemy):
+        return super().attack(enemy)
 
-
+    def come_under_attack(self, damage):
+        return super().come_under_attack(damage)
 
 
 class Enemy(Character):
@@ -59,6 +74,11 @@ class Enemy(Character):
     def show_details(self):
         return super().show_details() + f"\n Type: {self.get_type()}"
     
+    def attack(self, enemy):
+        return super().attack(enemy)
+    
+    def come_under_attack(self, damage):
+        return super().come_under_attack(damage)
 
 
 class Game:
@@ -79,7 +99,13 @@ class Game:
 
             input("Press enter to attack...")
 
-            chose = input(("Chose (1 - Normal Attack) (2 - Special Attack)"))
+            chose = int(input(("Chose (1 - Normal Attack) (2 - Special Attack)")))
+            
+            if chose == 1:
+                self.hero.attack(self.enemy)
+
+            else:
+                print("Invalid chose")
 
 
 
